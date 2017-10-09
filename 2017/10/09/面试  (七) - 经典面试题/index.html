@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？Objecitve-C的重要特性是Runtime（运行时）,在#import  下能看到相关的方法，用过objc_getClass()和class_copyMethodList()获取过私有API;使用Method method1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题7：经典面试题">
+<meta property="og:url" content="http://yoursite.com/2017/10/09/面试  (七) - 经典面试题/index.html">
+<meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
+<meta property="og:description" content="你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？Objecitve-C的重要特性是Runtime（运行时）,在#import  下能看到相关的方法，用过objc_getClass()和class_copyMethodList()获取过私有API;使用Method method1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-09T07:03:39.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题7：经典面试题">
+<meta name="twitter:description" content="你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？Objecitve-C的重要特性是Runtime（运行时）,在#import  下能看到相关的方法，用过objc_getClass()和class_copyMethodList()获取过私有API;使用Method method1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/09/面试  (七) - 经典面试题/"/>
+
+
+
+
+
+  <title>面试题7：经典面试题 | dumdum's Blog'</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dumdum's Blog'</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/面试  (七) - 经典面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dumdum's Blog'">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试题7：经典面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T15:03:39+08:00">
+                2017-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="你使用过Objective-C的运行时编程（Runtime-Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？"><a href="#你使用过Objective-C的运行时编程（Runtime-Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？" class="headerlink" title="你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？"></a>你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？</h2><p>Objecitve-C的重要特性是Runtime（运行时）,在#import <objc runtime.h=""> 下能看到相关的方法，用过<code>objc_getClass()</code>和class_copyMethodList()获取过私有API;使用<br>Method method1 = class_getInstanceMethod(cls, sel1);<br>Method method2 = class_getInstanceMethod(cls, sel2);<br>method_exchangeImplementations(method1, method2);<br>代码交换两个方法，在写unit test时使用到。</objc></p>
+<h2 id="NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？"><a href="#NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？" class="headerlink" title="NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？"></a>NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？</h2><p>NSNotification是通知模式在iOS的实现，KVO的全称是键值观察(Key-value observing),其是基于KVC（key-value coding）的，KVC是一个通过属性名访问属性变量的机制。例如将Module层的变化，通知到多个Controller对象时，可以使用NSNotification；如果是只需要观察某个对象的某个属性，可以使用KVO。<br>对于委托模式，在设计模式中是对象适配器模式，其是delegate是指向某个对象的，这是一对一的关系，而在通知模式中，往往是一对多的关系。委托模式，从技术上可以现在改变delegate指向的对象，但不建议这样做，会让人迷惑，如果一个delegate对象不断改变，指向不同的对象。</p>
+<h2 id="你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。"><a href="#你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。" class="headerlink" title="你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。"></a>你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。</h2><p>使用NSOperationQueue用来管理子类化的NSOperation对象，控制其线程并发数目。GCD和NSOperation都可以实现对线程的管理，区别是 NSOperation和NSOperationQueue是多线程的面向对象抽象。项目中使用NSOperation的优点是NSOperation是对线程的高度抽象，在项目中使用它，会使项目的程序结构更好，子类化NSOperation的设计思路，是具有面向对象的优点（复用、封装），使得实现是多线程支持，而接口简单，建议在复杂项目中使用。<br>项目中使用GCD的优点是GCD本身非常简单、易用，对于不复杂的多线程操作，会节省代码量，而Block参数的使用，会是代码更为易读，建议在简单项目中使用。</p>
+<h2 id="既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？"><a href="#既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？" class="headerlink" title="既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？"></a>既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？</h2><p>使用block是要注意，若将block做函数参数时，需要把它放到最后，GCD是Grand Central Dispatch，是一个对线程开源类库，而Block是闭包，是能够读取其他函数内部变量的函数。 </p>
+<h2 id="单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）"><a href="#单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）" class="headerlink" title="单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）"></a>单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）</h2><p>理解：NSNotificationCenter使用了KVO，即Key-Value Observing,它提供一种机制，当指定的对象的属性被修改后，则对象就会接收到通知。简单的说就是每次指定的被观察的对象的属性被修改后，KVO就会自动通知相应的观察者了。</p>
+<h2 id="NSURLConnection类的同步请求方法是？（A）"><a href="#NSURLConnection类的同步请求方法是？（A）" class="headerlink" title="NSURLConnection类的同步请求方法是？（A）"></a>NSURLConnection类的同步请求方法是？（A）</h2><p>A.+sendSynchronousRequest:returningResponse:error:</p>
+<p>B.-initWithRequest:delegate:</p>
+<p>C.-initWithRequest:delegate:startImmediately:</p>
+<p>理解：B和C都是异步方法，需要设置delegate属性。</p>
+<h2 id="NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate-NSXMLParserDelegate常用的方法有哪些？（ABCDE）"><a href="#NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate-NSXMLParserDelegate常用的方法有哪些？（ABCDE）" class="headerlink" title="NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate,NSXMLParserDelegate常用的方法有哪些？（ABCDE）"></a>NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate,NSXMLParserDelegate常用的方法有哪些？（ABCDE）</h2><p>A. parserDidStartDocument</p>
+<p>B. parser:foundCharacters</p>
+<p>C. parser:didStartElement:namespaceURI:qualifiedName:attributes</p>
+<p>D. parser:didEndElement:namespaceURI:qulificedName</p>
+<p>E. parserDidEndDocument</p>
+<h2 id="NSXMLParser构造方法有哪些？（ABC）"><a href="#NSXMLParser构造方法有哪些？（ABC）" class="headerlink" title="NSXMLParser构造方法有哪些？（ABC）"></a>NSXMLParser构造方法有哪些？（ABC）</h2><p>A. initWithContentsOfURL</p>
+<p>B. initWithData</p>
+<p>C. initWithStream</p>
+<p>D. initWithContentsOfFile</p>
+<h2 id="判断是否为iPad设备语句是？（C）"><a href="#判断是否为iPad设备语句是？（C）" class="headerlink" title="判断是否为iPad设备语句是？（C）"></a>判断是否为iPad设备语句是？（C）</h2><p>A. if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone){….}</p>
+<p>B. if([[UIDevice currentDevice] userInterfaceIdiom] != UIUserInterfaceIdiomPhone){….}</p>
+<p>C.  if([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad){….}</p>
+<h2 id="NSAssert类似的宏有哪些-ABCD"><a href="#NSAssert类似的宏有哪些-ABCD" class="headerlink" title="NSAssert类似的宏有哪些?(ABCD)"></a>NSAssert类似的宏有哪些?(ABCD)</h2><p>A. NSAssert1</p>
+<p>B. NSAssert2</p>
+<p>C. NSAssert3</p>
+<p>D. NSAssert4</p>
+<p>理解：查阅官方文档：NSAssert1，NSAssert2，NSAssert3，NSAssert4，NSAssert5</p>
+<h2 id="Objective-C有哪几种内存管理方法？（ABCD）、"><a href="#Objective-C有哪几种内存管理方法？（ABCD）、" class="headerlink" title="Objective-C有哪几种内存管理方法？（ABCD）、"></a>Objective-C有哪几种内存管理方法？（ABCD）、</h2><p>A. MRR(Manual Retain Release)</p>
+<p>B. MRC(Manual Reference Counting )</p>
+<p>C. ARC(Automatic Reference Counting)</p>
+<p>D. GC(Garbage Collection)</p>
+<p>理解：MRR是MRC的官方名字；</p>
+<p>MRC是手动引用计数；</p>
+<p>ARC是自动引用计数；</p>
+<p>GC是垃圾回收（在开发OS X中使用）；</p>
+<h2 id="AddressBook框架中常用类？（ABCD）"><a href="#AddressBook框架中常用类？（ABCD）" class="headerlink" title="AddressBook框架中常用类？（ABCD）"></a>AddressBook框架中常用类？（ABCD）</h2><p>A. ABAddressBook;</p>
+<p>B. ABPerson;</p>
+<p>C. ABGroup;</p>
+<p>D. ABRecord;</p>
+<h2 id="AddressBookUI框架中的视图控制器？（ABCD）"><a href="#AddressBookUI框架中的视图控制器？（ABCD）" class="headerlink" title="AddressBookUI框架中的视图控制器？（ABCD）"></a>AddressBookUI框架中的视图控制器？（ABCD）</h2><p>A. ABPeoplePickerNavigationController;</p>
+<p>B. ABPersonViewController;</p>
+<p>C. ABNewPersonViewController;</p>
+<p>D.ABUnknownPersonViewController;</p>
+<h2 id="创建联系人使用的函数有哪些？（ABCD）"><a href="#创建联系人使用的函数有哪些？（ABCD）" class="headerlink" title="创建联系人使用的函数有哪些？（ABCD）"></a>创建联系人使用的函数有哪些？（ABCD）</h2><p>A. ABPersonCreate</p>
+<p>B. ABRecordSetValue</p>
+<p>C. ABMultiValueCreateMutable</p>
+<p>D. ABAddressBookSave</p>
+<h2 id="修改联系人使用的函数有哪些？（CD）"><a href="#修改联系人使用的函数有哪些？（CD）" class="headerlink" title="修改联系人使用的函数有哪些？（CD）"></a>修改联系人使用的函数有哪些？（CD）</h2><p>A. ABPersonCreate</p>
+<p>B. ABRecordSetValue</p>
+<p>C. ABAddressBookGetPersonWithRecordID</p>
+<p>D. ABAddressBookAddRecord</p>
+<h2 id="AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？"><a href="#AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？" class="headerlink" title="AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？"></a>AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？</h2><p>A. ABPeoplePickerNavigationController</p>
+<p>B. ABPersonViewController</p>
+<p>C. ABUnknownPersonViewController</p>
+<p>D. ABNewPersonViewController</p>
+<h2 id="iOS中持久化方式有哪些？（ABCD）"><a href="#iOS中持久化方式有哪些？（ABCD）" class="headerlink" title="iOS中持久化方式有哪些？（ABCD）"></a>iOS中持久化方式有哪些？（ABCD）</h2><p>A. 属性列表文件</p>
+<p>B. 对象归档</p>
+<p>C. SQLite数据库</p>
+<p>D. CoreData</p>
+<h2 id="NSURL的构造函数有？（CD）"><a href="#NSURL的构造函数有？（CD）" class="headerlink" title="NSURL的构造函数有？（CD）"></a>NSURL的构造函数有？（CD）</h2><p>A. + requestWithURL:</p>
+<p>B  - initWithURL:</p>
+<p>C + URLWithString:</p>
+<p>D  - initWithString:</p>
+<h2 id="表视图的相关类有哪些？（AB）"><a href="#表视图的相关类有哪些？（AB）" class="headerlink" title="表视图的相关类有哪些？（AB）"></a>表视图的相关类有哪些？（AB）</h2><p>A. UITableView</p>
+<p>B. UITableViewController</p>
+<p>C. UITableViewDelegate</p>
+<p>D. UITableViewDataSource</p>
+<p>理解：注意CD是委托和数据源。</p>
+<h2 id="下面属于表视图内置的扩展视图常量如下？（ABCD）"><a href="#下面属于表视图内置的扩展视图常量如下？（ABCD）" class="headerlink" title="下面属于表视图内置的扩展视图常量如下？（ABCD）"></a>下面属于表视图内置的扩展视图常量如下？（ABCD）</h2><p>A. UITableViewCellAccessoryNone</p>
+<p>B. UITableViewCellAccessoryDiscloureIndicator</p>
+<p>C. UITableViewCellAccessoryDetailDisclosureButton</p>
+<p>D. UITableViewCellAccessoryCheckmark</p>
+<h2 id="下面与导航相关的试图控制器有那哪些？（BC）"><a href="#下面与导航相关的试图控制器有那哪些？（BC）" class="headerlink" title="下面与导航相关的试图控制器有那哪些？（BC）"></a>下面与导航相关的试图控制器有那哪些？（BC）</h2><p>A. UIViewController</p>
+<p>B. UINavigationController</p>
+<p>C. UITableBarController</p>
+<p>D. UITableViewController</p>
+<h2 id="delegate中的property使用以下哪个属性？（A）"><a href="#delegate中的property使用以下哪个属性？（A）" class="headerlink" title="delegate中的property使用以下哪个属性？（A）"></a>delegate中的property使用以下哪个属性？（A）</h2><p>A. assign</p>
+<p>B. retain</p>
+<p>C. copy</p>
+<p>D. strong</p>
+<p>理解：assign防止循环引用；</p>
+<h2 id="关于Objective-C中属性的说明，错误的是（D）"><a href="#关于Objective-C中属性的说明，错误的是（D）" class="headerlink" title="关于Objective-C中属性的说明，错误的是（D）"></a>关于Objective-C中属性的说明，错误的是（D）</h2><p>A. readwrite是可读可写特性，需要生成getter方法和setter方法；</p>
+<p>B. readonly是只读特性，只有getter方法，没有setter方法；</p>
+<p>C.assign是赋值属性，setter方法将传入参数赋值给实例变量；</p>
+<p>D.retain表示持有特性，copy属性表示拷贝属性，都会建立一个相同的对象；</p>
+<p>理解：</p>
+<p>copy是创建一个新对象。</p>
+<p>retain是创建一个指针，引用对象计数+1.</p>
+<p>copy属性表示两个对象内容相同，新的对象retain为1，与旧有对象的引用计数无关。旧有对象没有变化。copy减少对象对上下文的依赖。</p>
+<p>retain属性表示两个对象地址相同（建立一个指针，指针拷贝），内容就是同一个内容，这个对象的retain+1。</p>
+<p>也就是说，copy是内容拷贝，retain是内容拷贝。</p>
+<h2 id="下面对category类别描述不正确的是（B）"><a href="#下面对category类别描述不正确的是（B）" class="headerlink" title="下面对category类别描述不正确的是（B）"></a>下面对category类别描述不正确的是（B）</h2><p>A. category可以添加新的方法；</p>
+<p>B. category可以删除修改之前的方法；</p>
+<p>C. 将类的实现分散到多个不同文件或多个不同框架中；</p>
+<p>D. 创建对私有方法的前向引用；</p>
+<p>理解：类别是一种为现有的类添加新方法的方式。利用Objective-C的动态运行时分配机制，Category提供了一种比继承更为简洁的方法来对class进行扩展，无需创建对象类的子类就能为现有的类添加新方法，可以为任何已经存在的class添加方法，包括那些没有源代码的类（比如某些框架类），但不能删除修改之前的方法。</p>
+<p>类别主要有3个作用：</p>
+<p>（1）可以将类的实现分散到多个不同文件或多个不同框架中，方便代码管理。也可以对框架提供类的扩展（没有源码，不能修改）。</p>
+<p>（2）创建对私有方法的前向引用。如果其他类中的方法未实现，在你访问其他类的私有方法时编译器报错。这时使用类别，在类别中声明这些方法（不必提供方法实现），编译器就不会产生警告。</p>
+<p>（3）向对象添加非正式协议：创建一个NSObject的类别成为“创建一个非正式协议”，因为可以作为任何类的委托对象使用。</p>
+<h2 id="NSRunLoop的以下描述错误的是（C）"><a href="#NSRunLoop的以下描述错误的是（C）" class="headerlink" title="NSRunLoop的以下描述错误的是（C）"></a>NSRunLoop的以下描述错误的是（C）</h2><p>A. RunLoop并不是由系统自动控制的；</p>
+<p>B. 有3类对象可以被run loop监控：sources，timer,observers</p>
+<p>C. 线程是默认启动run loop的；</p>
+<p>D. NSTimer可手动添加到新建的NSRunLoop中。</p>
+<p>理解：</p>
+<p>A：Runloop的作用在于当有事情要做时它使当前的thread工作，没有事情做时又使thread休眠。Runloop并不是由系统自动控制的，尤其是对那些新建的次线程需要对其进行显示的控制。</p>
+<p>B：有三类对象可以被run loop监控，source，timer，observers。</p>
+<p>C: 每一个线程都有自己的runloop，主线程是默认开启的，创建的子线程是要手动开启的，因为NSApplication 只启动main application thread.</p>
+<p>D: NSTimer默认添加到当前NSRunLoop中，也可以手动指定添加到自己新建的NSRunLoop中。</p>
+<p>##（判断）平铺导航模式是在内容组织上没有层次关系，展示的内容都放置在一个主屏幕上，采用分屏或分页控制器进行导航，可以左右或者上下滑动屏幕查看内容。（正确）</p>
+<p>理解：平铺导航模式是指内容间没有从属关系，主要涉及的控件UIPageControl和UIScrollView。</p>
+<h2 id="UIPopoverController控制器的常用方法和属性（ABCD）"><a href="#UIPopoverController控制器的常用方法和属性（ABCD）" class="headerlink" title="UIPopoverController控制器的常用方法和属性（ABCD）"></a>UIPopoverController控制器的常用方法和属性（ABCD）</h2><p>A. presentPopoverFromBarButtonItem：permittedArrowDirections:animated: 呈现Popover视图方法；</p>
+<p>B. dismissPopoverAnimated：关闭Popover视图方法；</p>
+<p>C. popoverVisible,判断Popover视图是否可见；</p>
+<p>D. popoverArrawDirection，判断Popover视图箭头的方向;</p>
+<p>理解：貌似UIPopoverController在iOS9之后被Deprecated了。</p>
+<h2 id="模态视图专用属性有哪些？（ABCD）"><a href="#模态视图专用属性有哪些？（ABCD）" class="headerlink" title="模态视图专用属性有哪些？（ABCD）"></a>模态视图专用属性有哪些？（ABCD）</h2><p>A. UIModalPresentationFullScreen,全屏状态，是默认呈现样式，iPhone只能全屏呈现。</p>
+<p>B. UIModalPresentationPageSheet，它的宽度是固定的768点，在iPad竖屏情况下则全屏显示。</p>
+<p>C. UIModalPresentationFormSheet，它的是固定的540*620点，无论是横屏还是竖屏情况下呈现尺寸都不会变化。</p>
+<p>D. UIModalPresentationCurrentContext,它与父视图控制器有相同的呈现方式。</p>
+<h2 id="iOS单元测试框架有哪些？（ABC）"><a href="#iOS单元测试框架有哪些？（ABC）" class="headerlink" title="iOS单元测试框架有哪些？（ABC）"></a>iOS单元测试框架有哪些？（ABC）</h2><p>A. OCUnit</p>
+<p>B. GHUnit</p>
+<p>C. OCMock</p>
+<p>D. NSXML</p>
+<p>理解：OCUnit和XCTest都是官方的测试框架，OCUnit过时已经被XCTest取代。</p>
+<p>GHUnit和OCMock都是第三方的测试框架。</p>
+<h2 id="NSURLRequest的构造函数有（ABCD）"><a href="#NSURLRequest的构造函数有（ABCD）" class="headerlink" title="NSURLRequest的构造函数有（ABCD）"></a>NSURLRequest的构造函数有（ABCD）</h2><p>A. +requestWithURL:</p>
+<p>B. -initWithURL;</p>
+<p>C. requestWithURL:cachePolicy:timeoutInterval;</p>
+<p>D. initWithURL:cachePolicy:timeoutInterval;</p>
+<h2 id="iOS-应用导航模式有哪些？（ABC）"><a href="#iOS-应用导航模式有哪些？（ABC）" class="headerlink" title="iOS 应用导航模式有哪些？（ABC）"></a>iOS 应用导航模式有哪些？（ABC）</h2><p>A. 平铺导航模式；</p>
+<p>B. 标签导航模式；</p>
+<p>C. 树形结构导航模式；</p>
+<p>D. 模态视图</p>
+<h2 id="在UIViewController类中与模态视图相关方法有哪些？（AB）"><a href="#在UIViewController类中与模态视图相关方法有哪些？（AB）" class="headerlink" title="在UIViewController类中与模态视图相关方法有哪些？（AB）"></a>在UIViewController类中与模态视图相关方法有哪些？（AB）</h2><p>A. presentViewController:animated:completion:</p>
+<p>B. dismissViewControllerAnimated:complation:</p>
+<p>C. addChildViewController:</p>
+<p>D. removeFromParentViewController.</p>
+<h2 id="iOS-中导航设计模式有几种？（ABC）"><a href="#iOS-中导航设计模式有几种？（ABC）" class="headerlink" title="iOS 中导航设计模式有几种？（ABC）"></a>iOS 中导航设计模式有几种？（ABC）</h2><p>A. 平铺视图；</p>
+<p>B. 标签视图；</p>
+<p>C. 树形视图；</p>
+<p>D. 模态视图导航；</p>
+<p>理解：</p>
+<p>平铺导航：UITabBarController</p>
+<p>标签导航：UINavigationController</p>
+<p>树形导航：UIPageViewController</p>
+<h2 id="实现多线程都有哪些方法（BC）"><a href="#实现多线程都有哪些方法（BC）" class="headerlink" title="实现多线程都有哪些方法（BC）"></a>实现多线程都有哪些方法（BC）</h2><p>A. 使用@synchronized(self)</p>
+<p>B. 使用GCD</p>
+<p>C. 使用NSOperationQueue</p>
+<p>D. 使用@thread</p>
+<h2 id="为什么说OC是runtime-language-ABD"><a href="#为什么说OC是runtime-language-ABD" class="headerlink" title="为什么说OC是runtime language?(ABD)"></a>为什么说OC是runtime language?(ABD)</h2><p>A. 将数据类型的确定由编译时，推迟到了运行时；</p>
+<p>B. 运行时机制使我们直到运行时才去决定一个对象的类别，以及调用该类别对象指定方法；</p>
+<p>C. 如果A继承了B，那么在编译时就已经生成了A的实例；</p>
+<p>D. 多态是指不同对象以自己的方式响应相同消息的能力；</p>
+<h2 id="常用的设计模式"><a href="#常用的设计模式" class="headerlink" title="常用的设计模式"></a>常用的设计模式</h2><p>• 单例模式<br>• 组合模式<br>• 观察者模式<br>• 代理模式<br>• 享元模式<br>• 工厂方法模式<br>• 抽象工厂模式</p>
+<h2 id="MVC的理解"><a href="#MVC的理解" class="headerlink" title="MVC的理解"></a>MVC的理解</h2><p>• 数据管理者(M)、数据展示者(V)、数据加工者(C)</p>
+<p>• M应该做的事：</p>
+<p>○ 给ViewController提供数据</p>
+<p>○ 给ViewController存储数据提供接口</p>
+<p>○ 提供经过抽象的业务基本组件，供Controller调度</p>
+<p>• C应该做的事：</p>
+<p>○ 管理View Container的生命周期</p>
+<p>○ 负责生成所有的View实例，并放入View Container</p>
+<p>○ 监听来自View与业务有关的事件，通过与Model的合作，来完成对应事件的业务。</p>
+<p>• V应该做的事：</p>
+<p>○ 响应与业务无关的事件，并因此引发动画效果，点击反馈（如果合适的话，尽量还是放在View去做）等。</p>
+<p>○ 界面元素表达</p>
+<h2 id="MVC-和-MVVM-的区别"><a href="#MVC-和-MVVM-的区别" class="headerlink" title="MVC 和 MVVM 的区别"></a>MVC 和 MVVM 的区别</h2><p>• MVVM是对胖模型进行的拆分，其本质是给控制器减负，将一些弱业务逻辑放到VM中处理</p>
+<p>• MVC是一切设计的基础，所有新的设计模式都是基于MVC进行的改进</p>
+<p>• 补充：常见的设计模式有：MVC、MVCS、MVVM、viper</p>
+<h2 id="TCP和UDP有什么区别？"><a href="#TCP和UDP有什么区别？" class="headerlink" title="TCP和UDP有什么区别？"></a>TCP和UDP有什么区别？</h2><p>• TCP是面向连接的，建立连接需要经历三次握手，保证数据正确性和数据顺序</p>
+<p>• UDP是非连接的协议，传送数据受生成速度，传输带宽等限制，可能造成丢包</p>
+<p>• UDP一台服务端可以同时向多个客户端传输信息</p>
+<p>• TCP报头体积更大，对系统资源要求更多</p>
+<h2 id="TCP的三次握手"><a href="#TCP的三次握手" class="headerlink" title="TCP的三次握手"></a>TCP的三次握手</h2><p>• 第一次握手：客户端发送syn包到服务器，并进入syn_send状态，等待服务器进行确认；</p>
+<p>• 第二次握手：服务器收到客户端的syn包，必须确认客户的SYN，同时自己也发送一个SYN包,即SYN + ACK包，此时服务器进入SYN_RECV状态;</p>
+<p>• 第三次握手：客户收到服务器发送的SYN+ACK包之后，向服务器发送确认包,此包发送完毕，客户端和服务器进入ESTABLISHED状态，完成第三次握手。</p>
+<h2 id="如何制作一个静态库-动态库？他们的区别是什么？"><a href="#如何制作一个静态库-动态库？他们的区别是什么？" class="headerlink" title="如何制作一个静态库/动态库？他们的区别是什么？"></a>如何制作一个静态库/动态库？他们的区别是什么？</h2><p>• Xcode6支持制作静态库/动态库framework</p>
+<p>• 无论是动态库还是静态库都是区分真机和模拟器的</p>
+<p>• 静态库编译静态库文件装入程序空间，动态库是文件动态装入内存</p>
+<p>• 动态库执行到相关函数才会被调用，节省空间</p>
+<p>• 苹果一般不允许第三方动态库，APP容易被拒</p>
+<blockquote>
+<p>有什么问题都可联系我们 ：dumdumgum@163.com</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/30/面试  (六) - 原理篇/" rel="next" title="面试6：原理篇">
+                <i class="fa fa-chevron-left"></i> 面试6：原理篇
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你使用过Objective-C的运行时编程（Runtime-Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？"><span class="nav-number">1.</span> <span class="nav-text">你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？你还能记得你所使用的相关的头文件或者某些方法的名称吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？"><span class="nav-number">2.</span> <span class="nav-text">NSNotification和KVO的区别和用法是什么？什么时候应该使用通知，什么时候应该使用KVO，它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。"><span class="nav-number">3.</span> <span class="nav-text">你用过NSOperationQueue么？如果用过或者了解的话，你为什么要使用NSOperationQueue，实现了什么？请描述它和GCD的区别和类似的地方（提示：可以从两者的实现机制和适用范围来描述）。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？"><span class="nav-number">4.</span> <span class="nav-text">既然提到GCD，那么问一下在使用GCD以及block时要注意些什么？它们两是一回事儿么？block在ARC中和传统的MRC中的行为和用法有没有什么区别，需要注意些什么？如何避免循环引用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）"><span class="nav-number">5.</span> <span class="nav-text">单例类NSNotificationCenter提供信息广播通知，它采用的是观察者模式的的通知机制（正确）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLConnection类的同步请求方法是？（A）"><span class="nav-number">6.</span> <span class="nav-text">NSURLConnection类的同步请求方法是？（A）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate-NSXMLParserDelegate常用的方法有哪些？（ABCDE）"><span class="nav-number">7.</span> <span class="nav-text">NSXML框架中核心的是NSXMLParser和它的委托协议NSXMLParserDelegate,NSXMLParserDelegate常用的方法有哪些？（ABCDE）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSXMLParser构造方法有哪些？（ABC）"><span class="nav-number">8.</span> <span class="nav-text">NSXMLParser构造方法有哪些？（ABC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判断是否为iPad设备语句是？（C）"><span class="nav-number">9.</span> <span class="nav-text">判断是否为iPad设备语句是？（C）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSAssert类似的宏有哪些-ABCD"><span class="nav-number">10.</span> <span class="nav-text">NSAssert类似的宏有哪些?(ABCD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Objective-C有哪几种内存管理方法？（ABCD）、"><span class="nav-number">11.</span> <span class="nav-text">Objective-C有哪几种内存管理方法？（ABCD）、</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AddressBook框架中常用类？（ABCD）"><span class="nav-number">12.</span> <span class="nav-text">AddressBook框架中常用类？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AddressBookUI框架中的视图控制器？（ABCD）"><span class="nav-number">13.</span> <span class="nav-text">AddressBookUI框架中的视图控制器？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建联系人使用的函数有哪些？（ABCD）"><span class="nav-number">14.</span> <span class="nav-text">创建联系人使用的函数有哪些？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改联系人使用的函数有哪些？（CD）"><span class="nav-number">15.</span> <span class="nav-text">修改联系人使用的函数有哪些？（CD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？"><span class="nav-number">16.</span> <span class="nav-text">AddressBook高级API是在AddressBookUI框架中定义的，它为我们访问通讯录数据提供了UI界面。该框架提供了哪些试图控制器和委托协议？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS中持久化方式有哪些？（ABCD）"><span class="nav-number">17.</span> <span class="nav-text">iOS中持久化方式有哪些？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURL的构造函数有？（CD）"><span class="nav-number">18.</span> <span class="nav-text">NSURL的构造函数有？（CD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#表视图的相关类有哪些？（AB）"><span class="nav-number">19.</span> <span class="nav-text">表视图的相关类有哪些？（AB）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面属于表视图内置的扩展视图常量如下？（ABCD）"><span class="nav-number">20.</span> <span class="nav-text">下面属于表视图内置的扩展视图常量如下？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面与导航相关的试图控制器有那哪些？（BC）"><span class="nav-number">21.</span> <span class="nav-text">下面与导航相关的试图控制器有那哪些？（BC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#delegate中的property使用以下哪个属性？（A）"><span class="nav-number">22.</span> <span class="nav-text">delegate中的property使用以下哪个属性？（A）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Objective-C中属性的说明，错误的是（D）"><span class="nav-number">23.</span> <span class="nav-text">关于Objective-C中属性的说明，错误的是（D）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下面对category类别描述不正确的是（B）"><span class="nav-number">24.</span> <span class="nav-text">下面对category类别描述不正确的是（B）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSRunLoop的以下描述错误的是（C）"><span class="nav-number">25.</span> <span class="nav-text">NSRunLoop的以下描述错误的是（C）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UIPopoverController控制器的常用方法和属性（ABCD）"><span class="nav-number">26.</span> <span class="nav-text">UIPopoverController控制器的常用方法和属性（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#模态视图专用属性有哪些？（ABCD）"><span class="nav-number">27.</span> <span class="nav-text">模态视图专用属性有哪些？（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS单元测试框架有哪些？（ABC）"><span class="nav-number">28.</span> <span class="nav-text">iOS单元测试框架有哪些？（ABC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSURLRequest的构造函数有（ABCD）"><span class="nav-number">29.</span> <span class="nav-text">NSURLRequest的构造函数有（ABCD）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-应用导航模式有哪些？（ABC）"><span class="nav-number">30.</span> <span class="nav-text">iOS 应用导航模式有哪些？（ABC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在UIViewController类中与模态视图相关方法有哪些？（AB）"><span class="nav-number">31.</span> <span class="nav-text">在UIViewController类中与模态视图相关方法有哪些？（AB）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-中导航设计模式有几种？（ABC）"><span class="nav-number">32.</span> <span class="nav-text">iOS 中导航设计模式有几种？（ABC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现多线程都有哪些方法（BC）"><span class="nav-number">33.</span> <span class="nav-text">实现多线程都有哪些方法（BC）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么说OC是runtime-language-ABD"><span class="nav-number">34.</span> <span class="nav-text">为什么说OC是runtime language?(ABD)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的设计模式"><span class="nav-number">35.</span> <span class="nav-text">常用的设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC的理解"><span class="nav-number">36.</span> <span class="nav-text">MVC的理解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MVC-和-MVVM-的区别"><span class="nav-number">37.</span> <span class="nav-text">MVC 和 MVVM 的区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP和UDP有什么区别？"><span class="nav-number">38.</span> <span class="nav-text">TCP和UDP有什么区别？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#TCP的三次握手"><span class="nav-number">39.</span> <span class="nav-text">TCP的三次握手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何制作一个静态库-动态库？他们的区别是什么？"><span class="nav-number">40.</span> <span class="nav-text">如何制作一个静态库/动态库？他们的区别是什么？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
