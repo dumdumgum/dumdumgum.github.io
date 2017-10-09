@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
 <meta property="og:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T08:54:36.000Z">
+<meta property="og:updated_time" content="2017-10-09T09:00:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题8：高级面试题">
 <meta name="twitter:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
@@ -442,7 +442,7 @@
 <p>3、抗修改性：对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别。</p>
 <p>4、弱抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据（即伪造数据）是非常困难的。</p>
 <p>5、强抗碰撞：想找到两个不同的数据，使它们具有相同的MD5值，是非常困难的。</p>
-<p>MD5虽然说是不可逆的 但是由于有网站<a href="http://www.cmd5.com的存在，专门用来查询MD5码" target="_blank" rel="external">http://www.cmd5.com的存在，专门用来查询MD5码</a> 所以有的简单的MD5码是可以在这里搜到源码的。</p>
+<p>MD5虽然说是不可逆的 但是由于有网站<a href="http://www.cmd5.com" target="_blank" rel="external">http://www.cmd5.com</a>的存在，专门用来查询MD5码 所以有的简单的MD5码是可以在这里搜到源码的。</p>
 <p>为了让MD5码更加安全 涌现了很多其他方法 如加盐。 盐要足够长足够乱 得到的MD5码就很难查到。</p>
 <p>二.HMAC加密</p>
 <p>此加密方法需要先生成密钥，然后再对密码进行MD5和HMAC加密，数据库中需要存放当时使用的密钥和密码加密后的密文</p>
