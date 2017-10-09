@@ -101,7 +101,7 @@
 <meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
 <meta property="og:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-09T08:47:53.000Z">
+<meta property="og:updated_time" content="2017-10-09T08:54:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试题8：高级面试题">
 <meta name="twitter:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
@@ -351,27 +351,27 @@
 <p>正式开始  支付宝教程：</p>
 <p>1 将需要的文件，静态库等拖入工程中，这里有：include，libs，Utilities，libcrypto.a，libssl.a文件</p>
 <p>2 添加 库</p>
-<p>Linked Frameworks and Libraries  中 添加 libssl.a   libcrypto.a   SystemConfiguration.framework、AlipaySDK.framework</p>
+<p>Linked Frameworks and Libraries  中添加 libssl.a   libcrypto.a   SystemConfiguration.framework、AlipaySDK.framework</p>
 <p>3  如果商户要在某个文件中使用给支付宝的SDK 类库，需要增加引用头文件<br><code>#import &quot;Order.h&quot;</code></p>
 <p><code>#import &quot;DataSigner.h&quot;</code></p>
 <p><code>#import &lt;AlipaySDK/AlipaySDK.h&gt;</code></p>
 <p>4  后面的基本上都是 按照官方demo写的</p>
 <p>接口调用步骤：</p>
 <p>1.封装订单模型将商品信息赋予AlixPayOrder的成员变量</p>
-<p><code>Order *order = [[Order alloc] init];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Order *order = [[Order alloc] init];</div></pre></td></tr></table></figure>
 <p>应用注册scheme，在项目的info.plist 定义URL types</p>
-<p><code>NSString *appScheme = @&quot;zhifu&quot;;</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *appScheme = @&quot;zhifu&quot;;</div></pre></td></tr></table></figure>
 <p>生成订单描述</p>
-<p><code>NSString *orderSpec = [order description];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *orderSpec = [order description];</div></pre></td></tr></table></figure>
 <p>2.签名：获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode</p>
-<p><code>idsigner = CreateRSADataSigner(@“私钥key”);</code></p>
-<p><code>NSString *signedString = [signer signString:orderSpec];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">idsigner = CreateRSADataSigner(@“私钥key”);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *signedString = [signer signString:orderSpec];</div></pre></td></tr></table></figure>
 <p>传入订单描述 进行 签名</p>
-<p><code>NSString *signedString = [signer signString:orderSpec];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *signedString = [signer signString:orderSpec];</div></pre></td></tr></table></figure>
 <p>3.生成订单字符串</p>
-<p><code>NSString *orderString = [NSString stringWithFormat:@&quot;%@&amp;sign=\&quot;%@\&quot;&amp;sign_type=\&quot;%@\&quot;&quot;,orderSpec,signedString, @&quot;RSA&quot;];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">NSString *orderString = [NSString stringWithFormat:@&quot;%@&amp;sign=\&quot;%@\&quot;&amp;sign_type=\&quot;%@\&quot;&quot;,orderSpec,signedString, @&quot;RSA&quot;];</div></pre></td></tr></table></figure>
 <p>4.调用支付接口</p>
-<p><code>[[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) { }];</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) &#123; &#125;];</div></pre></td></tr></table></figure>
 <h2 id="如何实现夜间模式？"><a href="#如何实现夜间模式？" class="headerlink" title="如何实现夜间模式？"></a>如何实现夜间模式？</h2><p>1.准备两套资源，分别对应日间模式和夜间模式。</p>
 <p>2.在系统全局保存一个变量(BOOL isNight),根据用户的操作改变这个变量的值；</p>
 <p>3.把每个需要被改变的view, viewcontroller加入通知中心中监听（NeedTransferToNight和NeedTransferToDay）事件；</p>
