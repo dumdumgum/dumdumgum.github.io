@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面试题8：高级面试题">
+<meta property="og:url" content="http://yoursite.com/2017/10/09/面试  (八) - 高级面试题/index.html">
+<meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
+<meta property="og:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-09T08:47:53.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面试题8：高级面试题">
+<meta name="twitter:description" content="如何应对APP版本升级，数据结构随之变化?如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事. 如果是服务端, 正常情况还是需要做接口层(当然">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/09/面试  (八) - 高级面试题/"/>
+
+
+
+
+
+  <title>面试题8：高级面试题 | dumdum's Blog'</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">dumdum's Blog'</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/09/面试  (八) - 高级面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="dumdum's Blog'">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面试题8：高级面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-09T16:45:08+08:00">
+                2017-10-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何应对APP版本升级，数据结构随之变化"><a href="#如何应对APP版本升级，数据结构随之变化" class="headerlink" title="如何应对APP版本升级，数据结构随之变化?"></a>如何应对APP版本升级，数据结构随之变化?</h2><p>如果是移动端, 视数据的重要性来定, 如果不重要, 那就忽视它. 如果重要, 就要额外做一个检查Documents(我这里假设你的数据文件放在Documents下)下的数据文件, 如果存在, 就SQL导出再加上按照新的数据结构导入到新的数据文件. 也就是两句SQL的事, 在升级后第一次进入应用的时候做这个事.</p>
+<p>如果是服务端, 正常情况还是需要做接口层(当然, 我也遇到没做接口层, 直接远程数据库操作的, 对这种, 我无话可说), 接口层的变动幅度, 往往没有数据层的变动大, 有时候, 哪怕数据结构变化了, 但接口层还是一样. 如果是碰到数据层变化逼迫接口层变化的情况, 那就需要保留老接口的同时, 提供新接口服务, 直到使用老接口的app保有量低到一定程度, 再关闭老接口. 我的产品接口, 是在接口中加上一个v(version)参数作为版本判断标志.</p>
+<h2 id="常用的设计模式"><a href="#常用的设计模式" class="headerlink" title="常用的设计模式"></a>常用的设计模式</h2><p>（一）代理模式<br>应用场景：当一个类的某些功能需要由别的类来实现，但是又不确定具体会是哪个类实现。<br>优势：解耦合<br>实例：tableview的 数据源delegate，通过和protocol的配合，完成委托诉求。<br>列表row个数delegate</p>
+<p>（二）观察者模式<br>应用场景：一般为model层对controller和view进行的通知方式，不关心谁去接收，只负责发布信息。<br>优势：解耦合<br>实例：Notification通知中心，注册通知中心，任何位置可以发送消息，注册观察者的对象可以接收。<br>kvo，键值对改变通知的观察者，平时基本没用过。</p>
+<p>（三）MVC模式<br>应用场景：是一中非常古老的设计模式，通过数据模型，控制器逻辑，视图展示将应用程序进行逻辑划分。<br>优势：使系统，层次清晰，职责分明，易于维护<br>实例：model-即数据模型，view-视图展示，controller进行UI展现和数据交互的逻辑控制。</p>
+<p>（四）单例模式<br>应用场景：确保程序运行期某个类，只有一份实例，用于进行资源共享控制。<br>优势：使用简单，延时求值，易于跨模块<br>实例：[UIApplication sharedApplication]。<br>注意事项：确保使用者只能通过 getInstance方法才能获得，单例类的唯一实例。<br>java，C++中使其没有公有构造函数，私有化并覆盖其构造函数。<br>object c中，重写allocWithZone方法，保证即使用户用 alloc方法直接创建单例类的实例，<br>返回的也只是此单例类的唯一静态变量。</p>
+<p>（五）工厂模式<br>应用场景：工厂方式创建类的实例，多与proxy模式配合，创建可替换代理类。<br>优势：易于替换，面向抽象编程，application只与抽象工厂和易变类的共性抽象类发生调用关系。<br>敏捷原则：DIP依赖倒置原则<br>实例：项目部署环境中依赖多个不同类型的数据库时，需要使用工厂配合proxy完成易用性替换<br>注意事项：项目初期，软件结构和需求都没有稳定下来时，不建议使用此模式，因为其劣势也很明显，<br>增 加了代码的复杂度，增加了调用层次，增加了内存负担。所以要注意防止模式的滥用。</p>
+<h2 id="单例会有什么弊端？"><a href="#单例会有什么弊端？" class="headerlink" title="单例会有什么弊端？"></a>单例会有什么弊端？</h2><p>主要优点：<br>1、提供了对唯一实例的受控访问。<br>2、由于在系统内存中只存在一个对象，因此可以节约系统资源，对于一些需要频繁创建和销毁的对象单例模式无疑可以提高系统的性能。<br>3、允许可变数目的实例。</p>
+<p>主要缺点：<br>1、由于单利模式中没有抽象层，因此单例类的扩展有很大的困难。<br>2、单例类的职责过重，在一定程度上违背了“单一职责原则”。<br>3、滥用单例将带来一些负面问题，如为了节省资源将数据库连接池对象设计为的单例类，可能会导致共享连接池对象的程序过多而出现连接池溢出；如果实例化的对象长时间不被利用，系统会认为是垃圾而被回收，这将导致对象状态的丢失。 </p>
+<h2 id="iOS-Extension-是什么"><a href="#iOS-Extension-是什么" class="headerlink" title="iOS Extension 是什么?"></a>iOS Extension 是什么?</h2><p>Extension是扩展,没有分类名字,是一种特殊的分类,类扩展可以扩展属性,成员变量和方法</p>
+<p>8.Apple Pay 是什么？它的大概工作流程是怎样的？<br>是苹果研制的一款用于支付的应用。<br>Apple Pay依靠NFC芯片，通过结合Touch ID，可以便捷完成移动端支付，并且可以通过拍照添加信用卡。Apple Pay所有存储的支付信息都是经过加密的，用户可以通过Find my iPhone来关闭所有的支付功能。此外，iTunes用户可以使用iTunes中已经存储的信用卡信息。</p>
+<p>Apple Pay在消费支付流程里是扮演的是支付通道的角色，把实物信用卡电子化。通过Apple Pay消费的时候，信用卡消费信息是通过苹果的通道到银联，银联再跟相关的发卡商结算。</p>
+<h2 id="iOS-的签名机制大概是怎样的？"><a href="#iOS-的签名机制大概是怎样的？" class="headerlink" title="iOS 的签名机制大概是怎样的？"></a>iOS 的签名机制大概是怎样的？</h2><p><a href="http://blog.csdn.net/yaya_lovepiggy/article/details/50771455" target="_blank" rel="external">点击跳转</a></p>
+<h2 id="NSOperation-相比于-GCD-有哪些优势？"><a href="#NSOperation-相比于-GCD-有哪些优势？" class="headerlink" title="NSOperation 相比于 GCD 有哪些优势？"></a>NSOperation 相比于 GCD 有哪些优势？</h2><p>GCD是基于c的底层api，NSOperation属于object-c类。ios 首先引入的是NSOperation，IOS4之后引入了GCD和NSOperationQueue并且其内部是用gcd实现的。<br>相对于GCD：</p>
+<ol>
+<li>NSOperation拥有更多的函数可用，具体查看api。</li>
+<li>在NSOperationQueue中，可以建立各个NSOperation之间的依赖关系。</li>
+<li>有kvo，可以监测operation是否正在执行（isExecuted）、是否结束（isFinished），是否取消（isCanceld）。</li>
+<li>NSOperationQueue可以方便的管理并发、NSOperation之间的优先级。</li>
+</ol>
+<h2 id="如何访问并修改一个类的私有属性"><a href="#如何访问并修改一个类的私有属性" class="headerlink" title="如何访问并修改一个类的私有属性?"></a>如何访问并修改一个类的私有属性?</h2><p>有两种方法可以访问私有属性,一种是通过KVC获取,一种是通过runtime访问并修改私有属性</p>
+<h2 id="支付功能"><a href="#支付功能" class="headerlink" title="支付功能"></a>支付功能</h2><p>支付宝是第三方支付平台，简单来说就是协调客户，商户，银行三者关系的方便平台<br>使用支付宝进行一个完整的支付功能，大致有以下步骤：</p>
+<p>a 与支付宝进行签约，获得商户ID（partner）和账号ID（seller）</p>
+<p>b 下载相应的公钥私钥文件（加密签名用）</p>
+<p>c 下载支付宝SDK</p>
+<p>d 生成订单信息</p>
+<p>e 调用支付宝客户端，有支付宝客户端跟支付宝安全服务器打交道</p>
+<p>f 支付完毕后返回支付结果给客户端和服务器</p>
+<p>支付功能的实现 有两种方式：<br>1  支付宝的应用可以 用url 直接连接到 支付宝的官网 （当然后台是要进行处理的）<br>2  第二种就是添加支付宝的第三方了</p>
+<p>正式开始  支付宝教程：</p>
+<p>1 将需要的文件，静态库等拖入工程中，这里有：include，libs，Utilities，libcrypto.a，libssl.a文件</p>
+<p>2 添加 库</p>
+<p>Linked Frameworks and Libraries  中 添加 libssl.a   libcrypto.a   SystemConfiguration.framework、AlipaySDK.framework</p>
+<p>3  如果商户要在某个文件中使用给支付宝的SDK 类库，需要增加引用头文件<br><code>#import &quot;Order.h&quot;</code></p>
+<p><code>#import &quot;DataSigner.h&quot;</code></p>
+<p><code>#import &lt;AlipaySDK/AlipaySDK.h&gt;</code></p>
+<p>4  后面的基本上都是 按照官方demo写的</p>
+<p>接口调用步骤：</p>
+<p>1.封装订单模型将商品信息赋予AlixPayOrder的成员变量</p>
+<p><code>Order *order = [[Order alloc] init];</code></p>
+<p>应用注册scheme，在项目的info.plist 定义URL types</p>
+<p><code>NSString *appScheme = @&quot;zhifu&quot;;</code></p>
+<p>生成订单描述</p>
+<p><code>NSString *orderSpec = [order description];</code></p>
+<p>2.签名：获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode</p>
+<p><code>idsigner = CreateRSADataSigner(@“私钥key”);</code></p>
+<p><code>NSString *signedString = [signer signString:orderSpec];</code></p>
+<p>传入订单描述 进行 签名</p>
+<p><code>NSString *signedString = [signer signString:orderSpec];</code></p>
+<p>3.生成订单字符串</p>
+<p><code>NSString *orderString = [NSString stringWithFormat:@&quot;%@&amp;sign=\&quot;%@\&quot;&amp;sign_type=\&quot;%@\&quot;&quot;,orderSpec,signedString, @&quot;RSA&quot;];</code></p>
+<p>4.调用支付接口</p>
+<p><code>[[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) { }];</code></p>
+<h2 id="如何实现夜间模式？"><a href="#如何实现夜间模式？" class="headerlink" title="如何实现夜间模式？"></a>如何实现夜间模式？</h2><p>1.准备两套资源，分别对应日间模式和夜间模式。</p>
+<p>2.在系统全局保存一个变量(BOOL isNight),根据用户的操作改变这个变量的值；</p>
+<p>3.把每个需要被改变的view, viewcontroller加入通知中心中监听（NeedTransferToNight和NeedTransferToDay）事件；</p>
+<p>4.默认为日间模式，isNight = YES.</p>
+<p>5.当用户点击夜间按钮时，如果isNight == YES, 讲此变量的值置为NO,通知中心发布NeedTransferToNight通知，所有需要被改变的view和viewcontroller在监听到此事 件时使用夜间资源重新绘制自身。其他view在初始化时如果发现isNight为YES.则使用夜间资源初始化自身。(反之亦然)</p>
+<p>6.运行程序，可以看到夜间模式。</p>
+<h2 id="frame-与-center-bounds的关系"><a href="#frame-与-center-bounds的关系" class="headerlink" title="frame 与 center bounds的关系"></a>frame 与 center bounds的关系</h2><p>1.frame属性是相对于父容器的定位坐标。</p>
+<p>2.bounds属性针对于自己，指明大小边框，默认点为（0，0），而宽和高与frame宽和高相等。</p>
+<p>3.center属性是针对与frame属性的中心点坐标。</p>
+<p>4.当frame变化时，bounds和center相应变化。</p>
+<p>5.当bounds变化时，frame会根据新bounds的宽和高，在不改变center的情况下，进行重新设定。</p>
+<p>6.center永远与frame相关，指定frame的中心坐标！</p>
+<h2 id="通知中心的实现原理？"><a href="#通知中心的实现原理？" class="headerlink" title="通知中心的实现原理？"></a>通知中心的实现原理？</h2><p>推送通知的过程可以分为以下几步：</p>
+<p>1.应用服务提供商从服务器端把要发送的消息和设备令牌（device token）发送给苹果的消息推送服务器APNs。</p>
+<p>2.APNs根据设备令牌在已注册的设备（iPhone、iPad、iTouch、mac等）查找对应的设备，将消息发送给相应的设备。</p>
+<p>3.客户端设备接将接收到的消息传递给相应的应用程序，应用程序根据用户设置弹出通知消息。</p>
+<h2 id="通知，代理，KVO的区别，以及通知的多线程问题"><a href="#通知，代理，KVO的区别，以及通知的多线程问题" class="headerlink" title="通知，代理，KVO的区别，以及通知的多线程问题"></a>通知，代理，KVO的区别，以及通知的多线程问题</h2><p>delegate的优势：</p>
+<p>1.非常严格的语法。所有将听到的事件必须是在delegate协议中有清晰的定义。</p>
+<p>2.如果delegate中的一个方法没有实现那么就会出现编译警告/错误</p>
+<p>3.协议必须在controller的作用域范围内定义</p>
+<p>4.在一个应用中的控制流程是可跟踪的并且是可识别的；</p>
+<p>5.在一个控制器中可以定义定义多个不同的协议，每个协议有不同的delegates</p>
+<p>6.没有第三方对象要求保持/监视通信过程。</p>
+<p>7.能够接收调用的协议方法的返回值。这意味着delegate能够提供反馈信息给controller</p>
+<p>缺点：</p>
+<p>1.需要定义很多代码：1.协议定义；2.controller的delegate属性；3.在delegate本身中实<br>现delegate方法定义</p>
+<p>2.在释放代理对象时，需要小心的将delegate改为nil。一旦设定失败，那么调用释放对象的方法将会出现内存crash</p>
+<p>3.在一个controller中有多个delegate对象，并且delegate是遵守同一个协议，但还是很难告诉多个对象同一个事件，不过有可能。</p>
+<p>notification</p>
+<p>在IOS应用开发中有一个”Notification Center“的概念。它是一个单例对象，允许当事件发生时通知一些对象。它允许我们在低程度耦合的情况下，满足控制器与一个任意的对象进行通信的目的。这种模式的基本特征是为了让其他的对象能够接收到在该controller中发生某种事件而产生的消息，controller用一个key（通知名称）。这样对于controller来说是匿名的，其他的使用同样的key来注册了该通知的对象（即观察者）能够对通知的事件作出反应。</p>
+<p>通知优势：</p>
+<p>1.不需要编写多少代码，实现比较简单；</p>
+<p>2.对于一个发出的通知，多个对象能够做出反应，即1对多的方式实现简单</p>
+<p>3.controller能够传递context对象（dictionary），context对象携带了关于发送通知的自定义的信息</p>
+<p>缺点：</p>
+<p>1.在编译期不会检查通知是否能够被观察者正确的处理；</p>
+<p>2.在释放注册的对象时，需要在通知中心取消注册；</p>
+<p>3.在调试的时候应用的工作以及控制过程难跟踪；</p>
+<p>4.需要第三方对喜爱那个来管理controller与观察者对象之间的联系；</p>
+<p>5.controller和观察者需要提前知道通知名称、UserInfo dictionary keys。如果这些没有在工作区间定义，那么会出现不同步的情况；</p>
+<p>6.通知发出后，controller不能从观察者获得任何的反馈信息</p>
+<p>KVO</p>
+<p>KVO是一个对象能够观察另外一个对象的属性的值，并且能够发现值的变化。前面两种模式更加适合一个controller与任何其他的对象进行通信，而KVO更加适合任何类型的对象侦听另外一个任意对象的改变（这里也可以是controller，但一般不是controller）。这是一个对象与另外一个对象保持同步的一种方法，即当另外一种对象的状态发生改变时，观察对象马上作出反应。它只能用来对属性作出反应，而不会用来对方法或者动作作出反应。</p>
+<p>优点：</p>
+<p>1.能够提供一种简单的方法实现两个对象间的同步。例如：model和view之间同步；</p>
+<p>2.能够对非我们创建的对象，即内部对象的状态改变作出响应，而且不需要改变内部对象（SKD对象）的实现；</p>
+<p>3.能够提供观察的属性的最新值以及先前值；</p>
+<p>4.用key paths来观察属性，因此也可以观察嵌套对象；</p>
+<p>5.完成了对观察对象的抽象，因为不需要额外的代码来允许观察值能够被观察</p>
+<p>缺点：</p>
+<p>1.我们观察的属性必须使用strings来定义。因此在编译器不会出现警告以及检查；</p>
+<p>2.对属性重构将导致我们的观察代码不再可用；</p>
+<p>3.复杂的“IF”语句要求对象正在观察多个值。这是因为所有的观察代码通过一个方法来指向；</p>
+<p>4.当释放观察者时不需要移除观察者。</p>
+<p>总结:</p>
+<p>从上面的分析中可以看出3中设计模式都有各自的优点和缺点。其实任何一种事物都是这样，问题是如何在正确的时间正确的环境下选择正确的事物。下面就讲讲如何发挥他们各自的优势，在哪种情况下使用哪种模式。注意使用任何一种模式都没有对和错，只有更适合或者不适合。每一种模式都给对象提供一种方法来通知一个事件给其他对象，而且前者不需要知道侦听者。在这三种模式中，我认为KVO有最清晰的使用案例，而且针对某个需求有清晰的实用性。而另外两种模式有比较相似的用处，并且经常用来给controller间进行通信。那么我们在什么情况使用其中之一呢？</p>
+<p>根据我开发iOS应用的经历，我发现有些过分的使用通知模式。我个人不是很喜欢使用通知中心。我发现用通知中心很难把握应用的执行流程。UserInfo dictionaries的keys到处传递导致失去了同步，而且在公共空间需要定义太多的常量。对于一个工作于现有的项目的开发者来说，如果过分的使用通知中心，那么很难理解应用的流程。</p>
+<p>我觉得使用命名规则好的协议和协议方法定义对于清晰的理解controllers间的通信是很容易的。努力的定义这些协议方法将增强代码的可读性，以及更好的跟踪你的app。代理协议发生改变以及实现都可通过编译器检查出来，如果没有将会在开发的过程中至少会出现crash，而不仅仅是让一些事情异常工作。甚至在同一事件通知多控制器的场景中，只要你的应用在controller层次有着良好的结构，消息将在该层次上传递。该层次能够向后传递直至让所有需要知道事件的controllers都知道。</p>
+<p>当然会有delegation模式不适合的例外情况出现，而且notification可能更加有效。例如：应用中所有的controller需要知道一个事件。然而这些类型的场景很少出现。另外一个例子是当你建立了一个架构而且需要通知该事件给正在运行中应用。</p>
+<p>根据经验，如果是属性层的时间，不管是在不需要编程的对象还是在紧紧绑定一个view对象的model对象，我只使用观察。对于其他的事件，我都会使用delegate模式。如果因为某种原因我不能使用delegate，首先我将估计我的app架构是否出现了严重的错误。如果没有错误，然后才使用notification。</p>
+<p>34.如何加密</p>
+<p>iOS里常见的几种信息加密方法简单总结</p>
+<p>一.MD5加密</p>
+<p>MD5加密是最常用的加密方法之一，是从一段字符串中通过相应特征生成一段32位的数字字母混合码。<br>MD5主要特点是 不可逆，相同数据的MD5值肯定一样，不同数据的MD5值不一样（也不是绝对的，但基本是不能一样的）。</p>
+<p>MD5算法还具有以下性质：</p>
+<p>1、压缩性：任意长度的数据，算出的MD5值长度都是固定的。</p>
+<p>2、容易计算：从原数据计算出MD5值很容易。</p>
+<p>3、抗修改性：对原数据进行任何改动，哪怕只修改1个字节，所得到的MD5值都有很大区别。</p>
+<p>4、弱抗碰撞：已知原数据和其MD5值，想找到一个具有相同MD5值的数据（即伪造数据）是非常困难的。</p>
+<p>5、强抗碰撞：想找到两个不同的数据，使它们具有相同的MD5值，是非常困难的。</p>
+<p>MD5虽然说是不可逆的 但是由于有网站<a href="http://www.cmd5.com的存在，专门用来查询MD5码" target="_blank" rel="external">http://www.cmd5.com的存在，专门用来查询MD5码</a> 所以有的简单的MD5码是可以在这里搜到源码的。</p>
+<p>为了让MD5码更加安全 涌现了很多其他方法 如加盐。 盐要足够长足够乱 得到的MD5码就很难查到。</p>
+<p>二.HMAC加密</p>
+<p>此加密方法需要先生成密钥，然后再对密码进行MD5和HMAC加密，数据库中需要存放当时使用的密钥和密码加密后的密文</p>
+<p>在用户登陆时 再次对填入的密码用密钥进行加密 并且还要加上当前时间（精确到分钟） 再次HMAC加密，服务器里也会拿出以前存放的密文加上时间再次加密。所以就算黑客在中途截取了密码的密文 也在能在1分钟只能破译才能有效，大大加强了安全性。服务器为了考虑到网络的延迟一般会多算一种答案，如23分过来的密码 他会把23分和22分的都算一下和用户匹配只要对上一个就允许登陆。</p>
+<p>三.base64加密</p>
+<p>在MIME格式的电子邮件中，base64可以用来将binary的字节序列数据编码成ASCII字符序列构成的文本。使用时，在传输编码方式中指 定base64。使用的字符包括大小写字母各26个，加上10个数字，和加号“+”，斜杠“/”，一共64个字符，等号“=”用来作为后缀用途。<br>完整的base64定义可见RFC 1421和RFC 2045。编码后的数据比原始数据略长，为原来的4/3。</p>
+<p>终端指令</p>
+<p>先cd 找到当前目录</p>
+<p>加密： $ base64 abc.png -o abc.txt</p>
+<p>解密： $ base64 abc.txt -o 123.png -D</p>
+<p>四.对称加密算法<br>优点：算法公开、计算量小、加密速度快、加密效率高、可逆</p>
+<p>缺点：双方使用相同钥匙，安全性得不到保证</p>
+<p>现状：对称加密的速度比公钥加密快很多，在很多场合都需要对称加密，</p>
+<p>相较于DES和3DES算法而言，AES算法有着更高的速度和资源使用效率，安全级别也较之更高了，被称为下一代加密标准</p>
+<p>nECB ：电子代码本，就是说每个块都是独立加密的</p>
+<p>nCBC ：密码块链，使用一个密钥和一个初始化向量 (IV)对数据执行加密转换</p>
+<p>ECB和CBC区别：CBC更加复杂更加安全，里面加入了8位的向量（8个0的话结果等于ECB）。在明文里面改一个字母，ECB密文对应的那一行会改变，CBC密文从那一行往后都会改变。</p>
+<p>ECB终端命令：<br><code>$ openssl enc -des-ecb -K 616263 -nosalt -in msg1.txt -out msg1.bin</code></p>
+<p>CBC终端命令：</p>
+<p><code>$ openssl enc -des-cbc -K 616263 -iv 0000000000000000 -nosalt -in msg1.txt -out msg2.bin</code></p>
+<p>五.RSA加密</p>
+<p>RSA非对称加密算法</p>
+<p>非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）</p>
+<p>公开密钥与私有密钥是一对，如果用公开密钥对数据进行加密，只有用对应的私有密钥才能解密；如<br>果用私有密钥对数据进行加密，那么只有用对应的公开密钥才能解密</p>
+<p>特点：</p>
+<p>非对称密码体制的特点：算法强度复杂、安全性依赖于算法与密钥但是由于其算法复杂，而使得加密解密速度没有对称加密解密的速度快</p>
+<p>对称密码体制中只有一种密钥，并且是非公开的，如果要解密就得让对方知道密钥。所以保证其安全性就是保证密钥的安全，而非对称密钥体制有两种密钥，其中一个是公开的，这样就可以不需要像对<br>称密码那样传输对方的密钥了</p>
+<p>基本加密原理：</p>
+<p>(1)找出两个“很大”的质数：P &amp; Q</p>
+<p>(2)N = P * Q</p>
+<p>(3)M = (P – 1) * (Q – 1)</p>
+<p>(4)找出整数E，E与M互质，即除了1之外，没有其他公约数</p>
+<p>(5)找出整数D，使得E<em>D除以M余1，即 (E </em> D) % M = 1</p>
+<p>经过上述准备工作之后，可以得到：</p>
+<p>E是公钥，负责加密</p>
+<p>D是私钥，负责解密</p>
+<p>N负责公钥和私钥之间的联系</p>
+<p>加密算法，假定对X进行加密</p>
+<p>(X ^ E) % N = Y</p>
+<p>n根据费尔马小定义，根据以下公式可以完成解密操作</p>
+<p>(Y ^ D) % N = X</p>
+<p>但是RSA加密算法效率较差，对大型数据加密时间很长，一般用于小数据。</p>
+<p>常用场景：</p>
+<p>分部要给总部发一段报文，先对报文整个进行MD5得到一个报文摘要，再对这个报文摘要用公钥加密。然后把报文和这个RSA密文一起发过去。</p>
+<p>总部接收到报文之后要先确定报文是否在中途被人篡改，就先把这个密文用私钥解密得到报文摘要，再和整个报文MD5一下得到的报文摘要进行对比 如果一样就是没被改过。</p>
+<h2 id="你一般是如何优化你的APP的"><a href="#你一般是如何优化你的APP的" class="headerlink" title="你一般是如何优化你的APP的?"></a>你一般是如何优化你的APP的?</h2><p>一、首页启动速度</p>
+<p>启动过程中做的事情越少越好（尽可能将多个接口合并）</p>
+<p>不在UI线程上作耗时的操作（数据的处理在子线程进行，处理完通知主线程刷新）</p>
+<p>在合适的时机开始后台任务（例如在用户指引节目就可以开始准备加载的数据）</p>
+<p>尽量减小包的大小</p>
+<p>优化方法：</p>
+<p>量化启动时间</p>
+<p>启动速度模块化</p>
+<p>辅助工具（友盟，听云，Flurry）</p>
+<p>二、页面浏览速度</p>
+<p>json的处理（iOS 自带的NSJSONSerialization，Jsonkit，SBJson）</p>
+<p>数据的分页（后端数据多的话，就要分页返回，例如网易新闻，或者 微博记录）</p>
+<p>数据压缩（大数据也可以压缩返回，减少流量，加快反应速度）</p>
+<p>内容缓存（例如网易新闻的最新新闻列表都是要缓存到本地，从本地加载，可以缓存到内存，或者数据库，根据情况而定）</p>
+<p>延时加载tab（比如app有5个tab，可以先加载第一个要显示的tab，其他的在显示时候加载，按需加载）</p>
+<p>算法的优化（核心算法的优化，例如有些app 有个 联系人姓名用汉语拼音的首字母排序）</p>
+<p>三、操作流畅度优化：</p>
+<p>Tableview 优化（tableview cell的加载优化）</p>
+<p>ViewController加载优化（不同view之间的跳转，可以提前准备好数据）</p>
+<p>四、数据库的优化：</p>
+<p>数据库设计上面的重构</p>
+<p>查询语句的优化</p>
+<p>分库分表（数据太多的时候，可以分不同的表或者库）</p>
+<p>五、服务器端和客户端的交互优化：</p>
+<p>客户端尽量减少请求</p>
+<p>服务端尽量做多的逻辑处理</p>
+<p>服务器端和客户端采取推拉结合的方式（可以利用一些同步机制）</p>
+<p>通信协议的优化。（减少报文的大小）</p>
+<p>电量使用优化（尽量不要使用后台运行）</p>
+<p>六、非技术性能优化</p>
+<p>产品设计的逻辑性（产品的设计一定要符合逻辑，或者逻辑尽量简单，否则会让程序员抓狂，有时候用了好大力气，才可以完成一个小小的逻辑设计问题）</p>
+<p>界面交互的规范（每个模块的界面的交互尽量统一，符合操作习惯）</p>
+<p>代码规范（这个可以隐形带来app 性能的提高，比如 用if else 还是switch ，或者是用！还是 ＝＝）</p>
+<p>code review（坚持code Review 持续重构代码。减少代码的逻辑复杂度）</p>
+<p>日常交流（经常分享一些代码，或者逻辑处理中的坑）</p>
+<h2 id="push-Notification原理"><a href="#push-Notification原理" class="headerlink" title="push Notification原理"></a>push Notification原理</h2><p>本地推送:不需要联网也可以推送,是开发人员在APP内设定特定的时间来提醒用户干什么</p>
+<p>远程推送:需要联网,用户的设备会于苹果APNS服务器形成一个长连接,用户设备会发送uuid和Bundle idenidentifier给苹果服务器,苹果服务器会加密生成一个deviceToken给用户设备,然后设备会将deviceToken发送给APP的服务器,服务器会将deviceToken存进他们的数据库,这时候如果有人发送消息给我,服务器端就会去查询我的deviceToken,然后将deviceToken和要发送的信息发送给苹果服务器,苹果服务器通过deviceToken找到我的设备并将消息推送到我的设备上,这里还有个情况是如果APP在线,那么APP服务器会于APP产生一个长连接,这时候APPF服务器会直接通过deviceToken将消息推送到设备上</p>
+<h2 id="为什么-NotificationCenter-要-removeObserver-如何实现自动-remove"><a href="#为什么-NotificationCenter-要-removeObserver-如何实现自动-remove" class="headerlink" title="为什么 NotificationCenter 要 removeObserver? 如何实现自动 remove?"></a>为什么 NotificationCenter 要 removeObserver? 如何实现自动 remove?</h2><p>如果不移除的话,万一注册通知的类被销毁以后又发了通知,程序会崩溃.因为向野指针发送了消息</p>
+<p>实现自动remove:通过自释放机制,通过动态属性将remove转移给第三者,解除耦合,达到自动实现remove</p>
+<p>如果不移除的话,万一注册通知的类被销毁以后又发了通知,程序会崩溃.因为向野指针发送了消息<br>实现自动remove:通过自释放机制,通过动态属性将remove转移给第三者,解除耦合,达到自动实现remove</p>
+<h2 id="当-TableView-的-Cell-改变时，如何让这些改变以动画的形式呈现？"><a href="#当-TableView-的-Cell-改变时，如何让这些改变以动画的形式呈现？" class="headerlink" title="当 TableView 的 Cell 改变时，如何让这些改变以动画的形式呈现？"></a>当 TableView 的 Cell 改变时，如何让这些改变以动画的形式呈现？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line">@interface ViewController ()</div><div class="line"></div><div class="line">@property (nonatomic, strong) NSIndexPath *index;</div><div class="line"></div><div class="line">@end</div><div class="line"> </div><div class="line">@implementation ViewController</div><div class="line"> </div><div class="line">static NSString *ID = @&quot;cell&quot;;</div><div class="line"></div><div class="line">- (void)viewDidLoad &#123;    </div><div class="line">    [super viewDidLoad];</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line"></div><div class="line">    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];</div><div class="line">    </div><div class="line">    cell.textLabel.text = [NSString stringWithFormat:@&quot;%ld&quot;,(long)indexPath.row];</div><div class="line">    </div><div class="line">    return cell;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section &#123;</div><div class="line">    return 20;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    </div><div class="line">    if(self.index == indexPath)&#123;</div><div class="line">        </div><div class="line">        return 120;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    return 60;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath &#123;</div><div class="line">    self.index = indexPath;</div><div class="line">    </div><div class="line">    [tableView deselectRowAtIndexPath:indexPath animated:TRUE];</div><div class="line">    </div><div class="line">    //重点是这2句代码实现的功能</div><div class="line">    [tableView beginUpdates];</div><div class="line">    </div><div class="line">    [tableView endUpdates];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="如何把一个包含自定义对象的数组序列化到磁盘？"><a href="#如何把一个包含自定义对象的数组序列化到磁盘？" class="headerlink" title="如何把一个包含自定义对象的数组序列化到磁盘？"></a>如何把一个包含自定义对象的数组序列化到磁盘？</h2><p>自定义对象只需要实现NSCoding协议即可</p>
+<pre><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+
+    User *user = [User new];
+
+    Account *account = [Account new];
+
+    NSArray *userArray = @[user, account];
+
+    //存到磁盘
+    NSData * tempArchive = [NSKeyedArchiver archivedDataWithRootObject: userArray];
+}
+// 代理方法
+- (instancetype)initWithCoder:(NSCoder *)coder {
+
+    self = [super initWithCoder:coder];
+
+    if (self) {
+
+        self.user = [aDecoder decodeObjectForKey:@&quot;user&quot;];
+
+        self.account = [aDecoder decodeObjectForKey:@&quot;account&quot;];
+
+    }
+
+    return self;
+
+}
+// 代理方法
+-(void)encodeWithCoder:(NSCoder *)aCoder{
+
+    [aCoder encodeObject:self.user forKey:@&quot;user&quot;];
+
+    [aCoder encodeObject:self.account forKey:@&quot;account&quot;];
+}
+</code></pre><h2 id="非对称加密特性和用法"><a href="#非对称加密特性和用法" class="headerlink" title="非对称加密特性和用法"></a>非对称加密特性和用法</h2><p>非对称加密算法可能是世界上最重要的算法，它是当今电子商务等领域的基石。简而言之，非对称加密就是指加密密钥和解密密钥是不同的，而且加密密钥和 解密密钥是成对出现。非对称加密又叫公钥加密，也就是说成对的密钥，其中一个是对外公开的，所有人都可以获得，称为公钥，而与之相对应的称为私钥，只有这 对密钥的生成者才能拥有。公私钥具有以下重要特性：</p>
+<p>对于一个私钥，有且只有一个与之对应的公钥。生成者负责生成私钥和公钥，并保存私钥，公开公钥</p>
+<p>公钥是公开的，但不可能通过公钥反推出私钥，或者说极难反推，只能穷举，所以只要密钥足够长度，要通过穷举而得到私钥，几乎是不可能的</p>
+<p>通过私钥加密的密文只能通过公钥解密，公钥加密的密文只有通过私钥解密</p>
+<p>由于上述特性，非对称加密具有以下的典型用法：</p>
+<p>对信息保密，防止中间人攻击：将明文通过接收人的公钥加密，传输给接收人，因为只有接收人拥有</p>
+<p>对应的私钥，别人不可能拥有或者不可能通过公钥推算出私钥，所以传输过程中无法被中间人截获。只有拥有私钥的接收人才能阅读。此用法通常用于交换对称密钥。</p>
+<p>身份验证和防止篡改：设置权限的人用自己的私钥加密一段授权明文，并将授权明文和加密后的密文，以及公钥一并发送出来，接收方只需要通过公钥将密文解密后与授权明文对比是否一致，就可以判断明文在中途是否被篡改过。此方法用于数字签名。</p>
+<p>著名的RSA算法就是非对称加密算法，RSA以三个发明人的首字母命名。</p>
+<p>非对称加密算法如此强大可靠，却有一个弊端，就是加解密比较耗时。因此，在实际使用中，往往与对称加密和摘要算法结合使用。</p>
+<blockquote>
+<p>有什么问题都可联系我们 ：dumdumgum@163.com</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/09/面试  (七) - 经典面试题/" rel="next" title="面试题7：经典面试题">
+                <i class="fa fa-chevron-left"></i> 面试题7：经典面试题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="" />
+          <p class="site-author-name" itemprop="name"></p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何应对APP版本升级，数据结构随之变化"><span class="nav-number">1.</span> <span class="nav-text">如何应对APP版本升级，数据结构随之变化?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用的设计模式"><span class="nav-number">2.</span> <span class="nav-text">常用的设计模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单例会有什么弊端？"><span class="nav-number">3.</span> <span class="nav-text">单例会有什么弊端？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-Extension-是什么"><span class="nav-number">4.</span> <span class="nav-text">iOS Extension 是什么?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS-的签名机制大概是怎样的？"><span class="nav-number">5.</span> <span class="nav-text">iOS 的签名机制大概是怎样的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NSOperation-相比于-GCD-有哪些优势？"><span class="nav-number">6.</span> <span class="nav-text">NSOperation 相比于 GCD 有哪些优势？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何访问并修改一个类的私有属性"><span class="nav-number">7.</span> <span class="nav-text">如何访问并修改一个类的私有属性?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#支付功能"><span class="nav-number">8.</span> <span class="nav-text">支付功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现夜间模式？"><span class="nav-number">9.</span> <span class="nav-text">如何实现夜间模式？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#frame-与-center-bounds的关系"><span class="nav-number">10.</span> <span class="nav-text">frame 与 center bounds的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通知中心的实现原理？"><span class="nav-number">11.</span> <span class="nav-text">通知中心的实现原理？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通知，代理，KVO的区别，以及通知的多线程问题"><span class="nav-number">12.</span> <span class="nav-text">通知，代理，KVO的区别，以及通知的多线程问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你一般是如何优化你的APP的"><span class="nav-number">13.</span> <span class="nav-text">你一般是如何优化你的APP的?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#push-Notification原理"><span class="nav-number">14.</span> <span class="nav-text">push Notification原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么-NotificationCenter-要-removeObserver-如何实现自动-remove"><span class="nav-number">15.</span> <span class="nav-text">为什么 NotificationCenter 要 removeObserver? 如何实现自动 remove?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当-TableView-的-Cell-改变时，如何让这些改变以动画的形式呈现？"><span class="nav-number">16.</span> <span class="nav-text">当 TableView 的 Cell 改变时，如何让这些改变以动画的形式呈现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何把一个包含自定义对象的数组序列化到磁盘？"><span class="nav-number">17.</span> <span class="nav-text">如何把一个包含自定义对象的数组序列化到磁盘？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非对称加密特性和用法"><span class="nav-number">18.</span> <span class="nav-text">非对称加密特性和用法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
