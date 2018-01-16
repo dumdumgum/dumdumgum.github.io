@@ -94,19 +94,19 @@
 
 
 
-<meta name="description" content="参考文档 https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md 什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使">
+<meta name="description" content="什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使用 weak 来解决,比如: delegate 代理属性 自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用 weak,自定义 IBOutlet 控件属性一般也使用 weak；当然，也可以使用strong。在下文也有论述：">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GitHub面试搜索1">
 <meta property="og:url" content="http://yoursite.com/2017/10/13/GitHub面试搜索1/index.html">
 <meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
-<meta property="og:description" content="参考文档 https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md 什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使">
+<meta property="og:description" content="什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使用 weak 来解决,比如: delegate 代理属性 自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用 weak,自定义 IBOutlet 控件属性一般也使用 weak；当然，也可以使用strong。在下文也有论述：">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://camo.githubusercontent.com/8a5fa34435801cc4c2715d8880f3abd45be6a6c5/687474703a2f2f692e696d6775722e636f6d2f566c564b6c384c2e706e67">
 <meta property="og:image" content="https://camo.githubusercontent.com/bf346edc21ab4b3387906602249b357d250ab1c2/687474703a2f2f692e696d6775722e636f6d2f6541483559576e2e706e67">
-<meta property="og:updated_time" content="2017-10-13T10:06:38.000Z">
+<meta property="og:updated_time" content="2018-01-16T07:05:21.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GitHub面试搜索1">
-<meta name="twitter:description" content="参考文档 https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md 什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使">
+<meta name="twitter:description" content="什么情况使用 weak 关键字，相比 assign 有什么不同？什么情况使用 weak 关键字？  在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使用 weak 来解决,比如: delegate 代理属性 自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用 weak,自定义 IBOutlet 控件属性一般也使用 weak；当然，也可以使用strong。在下文也有论述：">
 <meta name="twitter:image" content="https://camo.githubusercontent.com/8a5fa34435801cc4c2715d8880f3abd45be6a6c5/687474703a2f2f692e696d6775722e636f6d2f566c564b6c384c2e706e67">
 
 
@@ -322,8 +322,7 @@
       
 
       
-        <p>参考文档 <a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md" target="_blank" rel="external">https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md</a></p>
-<h2 id="什么情况使用-weak-关键字，相比-assign-有什么不同？"><a href="#什么情况使用-weak-关键字，相比-assign-有什么不同？" class="headerlink" title="什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>什么情况使用 weak 关键字，相比 assign 有什么不同？</h2><p>什么情况使用 weak 关键字？</p>
+        <h2 id="什么情况使用-weak-关键字，相比-assign-有什么不同？"><a href="#什么情况使用-weak-关键字，相比-assign-有什么不同？" class="headerlink" title="什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>什么情况使用 weak 关键字，相比 assign 有什么不同？</h2><p>什么情况使用 weak 关键字？</p>
 <ol>
 <li>在 ARC 中,在有可能出现循环引用的时候,往往要通过让其中一端使用 weak 来解决,比如: delegate 代理属性</li>
 <li>自身已经对它进行一次强引用,没有必要再强引用一次,此时也会使用 weak,自定义 IBOutlet 控件属性一般也使用 weak；当然，也可以使用strong。在下文也有论述：<strong><em>《IBOutlet连出来的视图属性为什么可以被设置成weak?》</em></strong></li>
@@ -643,6 +642,7 @@
 <li>实例方法中直接调用实例方法</li>
 <li>实例方法中也可以调用类方法(通过类名)</li>
 </ol>
+<p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（上）.md" target="_blank" rel="external">参考文档</a></p>
 
       
     </div>
@@ -756,7 +756,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -827,7 +827,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>

@@ -94,17 +94,17 @@
 
 
 
-<meta name="description" content="参考文档  runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在">
+<meta name="description" content="runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在上篇中的《r">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GitHub面试搜索2">
 <meta property="og:url" content="http://yoursite.com/2017/10/17/GitHub面试搜索2/index.html">
 <meta property="og:site_name" content="dumdum&#39;s Blog&#39;">
-<meta property="og:description" content="参考文档  runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在">
+<meta property="og:description" content="runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在上篇中的《r">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-20T09:42:50.000Z">
+<meta property="og:updated_time" content="2018-01-16T07:05:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="GitHub面试搜索2">
-<meta name="twitter:description" content="参考文档  runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在">
+<meta name="twitter:description" content="runtime如何实现weak变量的自动置nil？ runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。  在上篇中的《r">
 
 
 
@@ -319,8 +319,7 @@
       
 
       
-        <p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下）.md" target="_blank" rel="external">参考文档</a> </p>
-<h2 id="runtime如何实现weak变量的自动置nil？"><a href="#runtime如何实现weak变量的自动置nil？" class="headerlink" title="runtime如何实现weak变量的自动置nil？"></a>runtime如何实现weak变量的自动置nil？</h2><blockquote>
+        <h2 id="runtime如何实现weak变量的自动置nil？"><a href="#runtime如何实现weak变量的自动置nil？" class="headerlink" title="runtime如何实现weak变量的自动置nil？"></a>runtime如何实现weak变量的自动置nil？</h2><blockquote>
 <p>runtime 对注册的类， 会进行布局，对于 weak 对象会放入一个 hash 表中。 用 weak 指向的对象内存地址作为 key，当此对象的引用计数为0的时候会 dealloc，假如 weak 指向的对象内存地址是a，那么就会以a为键， 在这个 weak 表中搜索，找到所有以a为键的 weak 对象，从而设置为 nil。</p>
 </blockquote>
 <p>在上篇中的《runtime 如何实现 weak 属性》有论述。（注：在上篇的《使用runtime Associate方法关联的对象，需要在主对象dealloc的时候释放么？》里给出的“对象的内存销毁时间表”也提到__weak引用的解除时间。）</p>
@@ -412,6 +411,7 @@
 <h2 id="addObserver-forKeyPath-options-context-各个参数的作用分别是什么，observer中需要实现哪个方法才能获得KVO回调？"><a href="#addObserver-forKeyPath-options-context-各个参数的作用分别是什么，observer中需要实现哪个方法才能获得KVO回调？" class="headerlink" title="addObserver:forKeyPath:options:context:各个参数的作用分别是什么，observer中需要实现哪个方法才能获得KVO回调？"></a>addObserver:forKeyPath:options:context:各个参数的作用分别是什么，observer中需要实现哪个方法才能获得KVO回调？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 添加键值观察</div><div class="line">/*</div><div class="line">1 观察者，负责处理监听事件的对象</div><div class="line">2 观察的属性</div><div class="line">3 观察的选项</div><div class="line">4 上下文</div><div class="line">*/</div><div class="line">[self.person addObserver:self forKeyPath:@&quot;name&quot; options:NSKeyValueObservingOptionNew | NSKeyValueObservingOptionOld context:@&quot;Person Name&quot;];</div></pre></td></tr></table></figure>
 <p>observer中需要实现一下方法：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">// 所有的 kvo 监听到事件，都会调用此方法</div><div class="line">/*</div><div class="line"> 1. 观察的属性</div><div class="line"> 2. 观察的对象</div><div class="line"> 3. change 属性变化字典（新／旧）</div><div class="line"> 4. 上下文，与监听的时候传递的一致</div><div class="line"> */</div><div class="line">- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context;</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/ChenYilong/iOSInterviewQuestions/blob/master/01《招聘一个靠谱的iOS》面试题参考答案/《招聘一个靠谱的iOS》面试题参考答案（下）.md" target="_blank" rel="external">参考文档</a> </p>
 
       
     </div>
@@ -445,6 +445,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/15/冒泡排序/" rel="prev" title="冒泡排序">
+                冒泡排序 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -521,7 +525,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -592,7 +596,7 @@
         <div class="copyright" >
   
   &copy; 
-  <span itemprop="copyrightYear">2017</span>
+  <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
